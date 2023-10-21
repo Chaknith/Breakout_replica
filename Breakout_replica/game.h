@@ -28,8 +28,6 @@ enum GameState {
 // easy access to each of the components and manageability.
 class Game {
 public:
-	// player paddle
-	GameObject* Player;
 	// game levels
 	std::vector<GameLevel> Levels;
 	unsigned int Level;
