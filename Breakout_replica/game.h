@@ -24,6 +24,19 @@ enum GameState {
 	GAME_WIN
 };
 
+enum Direction {
+	UP,     // 0 
+	RIGHT,  // 1
+	DOWN,   // 2
+	LEFT    // 3
+};
+
+struct Collision {
+	bool collided;
+	Direction direction;
+	glm::vec2 vector;
+};
+
 // Game holds all game-related state and funtionality;
 // combines all game-related data into a single class for
 // easy access to each of the components and manageability.
@@ -48,7 +61,10 @@ public:
 	// check collisions
 	void DoCollisions();
 private:
-	bool checkCollision(BallObject &one, GameObject &two);
+	Collision checkCollision(BallObject &one, GameObject &two);
+	Direction VectorDirection(glm::vec2 target);
+	void ResetLevel();
+	void ResetPlayer();
 };
 
 #endif // !GAME_H

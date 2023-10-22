@@ -10,6 +10,7 @@
 #include "resource_manager.h"
 #include "sprite_renderer.h"
 #include "ball_object.h"
+#include <iostream>
 
 SpriteRenderer* Renderer;
 
@@ -65,7 +66,7 @@ void Game::Init() {
 	// load player
 	glm::vec2 playerPos = glm::vec2(this->Width / 2.0f - PLAYER_SIZE.x / 2.0f, this->Height - PLAYER_SIZE.y);
 	Player = new GameObject(playerPos, PLAYER_SIZE, ResourceManager::GetTexture("paddle"));
-	// load ball
+	// load ball 
 	glm::vec2 ballPos = glm::vec2(this->Width / 2.0f - BALL_RADIUS, this->Height - PLAYER_SIZE.y - BALL_RADIUS * 2);
 	Ball = new BallObject(ballPos, BALL_RADIUS, INITIAL_BALL_VELOCITY, ResourceManager::GetTexture("ball"));
 }
@@ -75,6 +76,11 @@ void Game::Update(float dt) {
 	Ball->Move(dt, this->Width);
 	// check for collisions
 	this->DoCollisions();
+	// ball hit the bottom edge
+	if(Ball->Position.y >= this->Height){
+		this->ResetLevel();
+		this->ResetPlayer();
+	}
 }
 
 void Game::ProcessInput(float dt) {
@@ -116,17 +122,65 @@ void Game::Render() {
 }
 
 void Game::DoCollisions() {
+	// ball collides with brick
 	for (GameObject& tile : this->Levels[this->Level].Bricks) {
 		if (!tile.Destroyed) {
-			if (checkCollision(*Ball, tile)) {
+			Collision collision = checkCollision(*Ball, tile);
+			if (collision.collided) {
+				if (collision.direction == LEFT || collision.direction == RIGHT) {
+					// change the ball direction
+					Ball->Velocity.x *= -1;
+					// reposition the ball
+					float penetrationValue = Ball->Radius - std::abs(collision.vector.x);
+					if (collision.direction == LEFT)
+						Ball->Position.x -= penetrationValue;
+					else
+						Ball->Position.x += penetrationValue;
+				}
+				else if (collision.direction == UP || collision.direction == DOWN) {
+					// change the ball direction
+					Ball->Velocity.y *= -1;
+					// reposition the ball
+					float penetrationValue = Ball->Radius - std::abs(collision.vector.y);
+					if (collision.direction == UP)
+						Ball->Position.y -= penetrationValue;
+					else
+						Ball->Position.y += penetrationValue;
+				}
+
 				if (!tile.IsSolid)
 					tile.Destroyed = true;
 			}
 		}
 	}
+	
+	// ball collides with player
+	Collision collision = checkCollision(*Ball, *Player);
+	if (!Ball->Stuck && collision.collided) {
+		// reposition the ball
+		float penetrationValue = Ball->Radius - std::abs(collision.vector.y);
+		Ball->Position.y -= penetrationValue;
+		// redirect the ball
+		float playCenter = Player->Position.x + Player->Size.x / 2;
+		float ballCenter = Ball->Position.x + Ball->Radius;
+		// how far the ball from the center of the player
+		float distance = ballCenter - playCenter;
+
+		float percentage = distance / (Player->Size.x / 2.0f);
+		
+		// then move accordingly
+		float strength = 2.0f;
+		glm::vec2 oldVelocity = Ball->Velocity;
+		Ball->Velocity.x = INITIAL_BALL_VELOCITY.x * percentage * strength;
+		Ball->Velocity.y *= -1;
+		Ball->Velocity = glm::normalize(Ball->Velocity) * glm::length(oldVelocity);
+
+	}
 }
 
-bool Game::checkCollision(BallObject &ball, GameObject &brick) {
+Collision Game::checkCollision(BallObject &ball, GameObject &brick) {
+	Collision collision;
+	
 	// get ball's center
 	glm::vec2 ballCenter(ball.Position + ball.Radius);
 	// get brick's center
@@ -141,5 +195,49 @@ bool Game::checkCollision(BallObject &ball, GameObject &brick) {
 	// distance from the closest point to the ball's center
 	float distance = glm::distance(closestPoint, ballCenter);
 
-	return  distance < ball.Size.x/2.0f;
+	collision.collided = distance <= ball.Size.x / 2.0f;
+
+	// calculate collision direction
+	collision.direction = VectorDirection(closestPoint - ballCenter);
+	collision.vector = closestPoint - ballCenter;
+
+	return collision;
+}
+
+Direction Game::VectorDirection(glm::vec2 target){
+	glm::vec2 compass[] = {
+		glm::vec2(0.0f, 1.0f),	// up
+		glm::vec2(1.0f, 0.0f),	// right
+		glm::vec2(0.0f, -1.0f),	// down
+		glm::vec2(-1.0f, 0.0f)	// left
+	};
+
+	float highestValue = 0.0f;
+	int highestIndex = 0;
+
+	for (int i = 0; i < 4; i++) {
+		float newDotProduct = glm::dot(glm::normalize(target), compass[i]);
+		if (newDotProduct > highestValue) {
+			highestValue = newDotProduct;
+			highestIndex = i;
+		}
+	}
+
+	return (Direction)highestIndex;
+}
+
+void Game::ResetLevel() {
+	// redraw the level
+	for (GameObject& tile : this->Levels[this->Level].Bricks) {
+		tile.Destroyed = false;
+	}
+}
+
+void Game::ResetPlayer() {
+	// reset the ball
+	Ball->Stuck = true;
+	Ball->Position = glm::vec2(this->Width / 2.0f - BALL_RADIUS, this->Height - PLAYER_SIZE.y - BALL_RADIUS * 2);
+	Ball->Velocity = glm::vec2(100.0f, -350.0f);
+	// reset the player
+	Player->Position = glm::vec2(this->Width / 2.0f - PLAYER_SIZE.x / 2.0f, this->Height - PLAYER_SIZE.y);
 }
