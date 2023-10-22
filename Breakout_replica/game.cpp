@@ -71,7 +71,10 @@ void Game::Init() {
 }
 
 void Game::Update(float dt) {
+	// update objects
 	Ball->Move(dt, this->Width);
+	// check for collisions
+	this->DoCollisions();
 }
 
 void Game::ProcessInput(float dt) {
@@ -110,4 +113,33 @@ void Game::Render() {
 		// draw ball
 		Ball->Draw(*Renderer);
 	}
+}
+
+void Game::DoCollisions() {
+	for (GameObject& tile : this->Levels[this->Level].Bricks) {
+		if (!tile.Destroyed) {
+			if (checkCollision(*Ball, tile)) {
+				if (!tile.IsSolid)
+					tile.Destroyed = true;
+			}
+		}
+	}
+}
+
+bool Game::checkCollision(BallObject &ball, GameObject &brick) {
+	// get ball's center
+	glm::vec2 ballCenter(ball.Position + ball.Radius);
+	// get brick's center
+	glm::vec2 aabb_half_extents(brick.Size.x / 2.0f, brick.Size.y / 2.0f);
+	glm::vec2 brickCenter(brick.Position + aabb_half_extents);
+
+	// vector pointing from brick's center to ball's center
+	glm::vec2 vector = ballCenter - brickCenter;
+	// closest point to the ball
+	glm::vec2 closestPoint = brickCenter + glm::clamp(vector, -aabb_half_extents, aabb_half_extents);
+	
+	// distance from the closest point to the ball's center
+	float distance = glm::distance(closestPoint, ballCenter);
+
+	return  distance < ball.Size.x/2.0f;
 }

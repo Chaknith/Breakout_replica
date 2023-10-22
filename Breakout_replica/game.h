@@ -15,6 +15,7 @@
 #include <vector>
 
 #include "game_level.h"
+#include "ball_object.h"
 
 // Represents the current state of the game
 enum GameState {
@@ -44,6 +45,10 @@ public:
 	void ProcessInput(float dt);
 	void Update(float dt);
 	void Render();
+	// check collisions
+	void DoCollisions();
+private:
+	bool checkCollision(BallObject &one, GameObject &two);
 };
 
 #endif // !GAME_H
