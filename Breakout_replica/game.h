@@ -16,6 +16,7 @@
 
 #include "game_level.h"
 #include "ball_object.h"
+#include "power_up.h"
 
 // Represents the current state of the game
 enum GameState {
@@ -42,6 +43,7 @@ struct Collision {
 // easy access to each of the components and manageability.
 class Game {
 public:
+	std::vector<PowerUp>  PowerUps;
 	// game levels
 	std::vector<GameLevel> Levels;
 	unsigned int Level;
@@ -60,9 +62,9 @@ public:
 	void Render();
 	// check collisions
 	void DoCollisions();
+	void SpawnPowerUps(GameObject& block);
+	void UpdatePowerUps(float dt);
 private:
-	Collision checkCollision(BallObject &one, GameObject &two);
-	Direction VectorDirection(glm::vec2 target);
 	void ResetLevel();
 	void ResetPlayer();
 };
