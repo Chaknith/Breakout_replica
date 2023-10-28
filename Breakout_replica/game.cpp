@@ -13,6 +13,10 @@
 #include "particle_generator.h"
 #include "post_processor.h"
 #include <iostream>
+#include <irrKlang.h>
+using namespace irrklang;
+
+ISoundEngine* SoundEngine = createIrrKlangDevice();
 
 SpriteRenderer* Renderer;
 
@@ -94,6 +98,7 @@ void Game::Init() {
 	Ball->PassThrough = false;
 	// initialize particles
 	Particles = new ParticleGenerator(ResourceManager::GetShader("particle"), ResourceManager::GetTexture("particle"), 500);
+	SoundEngine->play2D("resources/audios/breakout.mp3", true);
 }
 
 void Game::Update(float dt) {
@@ -214,11 +219,13 @@ void Game::DoCollisions() {
 					if (!tile.IsSolid) {
 						tile.Destroyed = true;
 						this->SpawnPowerUps(tile);
+						SoundEngine->play2D("resources/audios/destroy.wav", false);
 					}
 					else
 					{   // if block is solid, enable shake effect
 						ShakeTime = 0.05f;
 						Effects->Shake = true;
+						SoundEngine->play2D("resources/audios/solid.wav", false);
 					}
 					if (!(Ball->PassThrough && !tile.IsSolid)) // don't do collision resolution on non-solid bricks if pass-through is activated
 					{
@@ -271,6 +278,7 @@ void Game::DoCollisions() {
 
 		// if Sticky powerup is activated, also stick ball to paddle once new velocity vectors were calculated
 		Ball->Stuck = Ball->Sticky;
+		SoundEngine->play2D("resources/audios/rebounce.wav", false);
 	}
 
 	for (PowerUp& powerUp : this->PowerUps)
@@ -284,6 +292,7 @@ void Game::DoCollisions() {
 				ActivatePowerUp(powerUp);
 				powerUp.Destroyed = true;
 				powerUp.Activated = true;
+				SoundEngine->play2D("resources/audios/powerup.wav", false);
 			}
 		}
 	}

@@ -88,9 +88,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\libraries\lib\glfw3.lib" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="shaders\sprite.vs" />
     <Text Include="shaders\sprite.frag" />
   </ItemGroup>
