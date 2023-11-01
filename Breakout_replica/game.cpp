@@ -13,11 +13,13 @@
 #include "particle_generator.h"
 #include "post_processor.h"
 #include "text_renderer.h"
+
 #include <iostream>
 #include <sstream>
+#include <filesystem>
 #include <irrKlang.h>
-using namespace irrklang;
 
+using namespace irrklang;
 ISoundEngine* SoundEngine = createIrrKlangDevice();
 
 SpriteRenderer* Renderer;
@@ -81,16 +83,10 @@ void Game::Init() {
 	ResourceManager::LoadTexture("resources/textures/powerup_passthrough.png", true, "powerup_passthrough");
 	ResourceManager::LoadTexture("resources/textures/powerup_sticky.png", true, "powerup_sticky");
 	// load levels
-	GameLevel one; one.Load("levels/one.txt", this->Width, this->Height / 2);
-	GameLevel two; two.Load("levels/two.txt", this->Width, this->Height / 2);
-	GameLevel three; three.Load("levels/three.txt", this->Width, this->Height / 2);
-	GameLevel four; four.Load("levels/four.txt", this->Width, this->Height / 2);
-	GameLevel five; five.Load("levels/win.txt", this->Width, this->Height / 2);
-	this->Levels.push_back(one);
-	this->Levels.push_back(two);
-	this->Levels.push_back(three);
-	this->Levels.push_back(four);
-	this->Levels.push_back(five);
+	for (const auto& entry : std::filesystem::directory_iterator("levels")) {
+		GameLevel level; level.Load(entry.path().string().c_str(), this->Width, this->Height / 2);
+		this->Levels.push_back(level);
+	}
 	this->Level = 0;
 	// load player
 	glm::vec2 playerPos = glm::vec2(this->Width / 2.0f - PLAYER_SIZE.x / 2.0f, this->Height - PLAYER_SIZE.y);

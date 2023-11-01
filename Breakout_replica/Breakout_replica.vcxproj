@@ -93,6 +93,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\irrklang;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\freetype;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions />
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -110,6 +111,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\irrklang;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\freetype;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions />
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,6 +129,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\irrklang;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\freetype;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions />
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,6 +147,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\irrklang;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\freetype;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions />
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
