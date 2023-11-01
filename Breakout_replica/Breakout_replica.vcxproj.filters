@@ -48,6 +48,9 @@
     <ClInclude Include="post_processor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="text_renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp">
@@ -86,6 +89,9 @@
     <ClCompile Include="post_processor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="text_renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="shaders\sprite.vs" />
@@ -96,5 +102,7 @@
     <None Include="shaders\particle.vs" />
     <None Include="shaders\post_processing.frag" />
     <None Include="shaders\post_processing.vs" />
+    <None Include="shaders\text.frag" />
+    <None Include="shaders\text.vs" />
   </ItemGroup>
 </Project>

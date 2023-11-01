@@ -11,6 +11,7 @@
 ParticleGenerator::ParticleGenerator(Shader shader, Texture2D texture, unsigned int amount)
 	: shader(shader), texture(texture), amount(amount) {
 	this->init();
+	initialSize = amount;
 }
 
 void ParticleGenerator::Update(float dt, GameObject& object, unsigned int newParticles, glm::vec2 offset) {
@@ -48,6 +49,12 @@ void ParticleGenerator::Draw() {
 	}
 	// dont forget to reset to default blending mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+}
+
+// render all particles
+void ParticleGenerator::Reset() {
+	this->particles.clear();
+	this->particles.resize(initialSize);
 }
 
 void ParticleGenerator::init() {

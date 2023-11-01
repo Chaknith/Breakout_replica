@@ -91,14 +91,14 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\irrklang;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\irrklang;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\freetype;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions />
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;irrKlang.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -108,7 +108,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\irrklang;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\irrklang;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\freetype;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions />
     </ClCompile>
     <Link>
@@ -117,7 +117,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;irrKlang.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -125,14 +125,14 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\irrklang;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\irrklang;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\freetype;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions />
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;irrKlang.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -142,7 +142,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\irrklang;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\irrklang;C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\include\freetype;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions />
     </ClCompile>
     <Link>
@@ -151,7 +151,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Users\chakn\Documents\GitHub\Breakout_replica\libraries\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;irrKlang.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -166,6 +166,7 @@
     <ClInclude Include="sprite_renderer.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="texture.h" />
+    <ClInclude Include="text_renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\libraries\glad.c" />
@@ -180,6 +181,7 @@
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="sprite_renderer.cpp" />
     <ClCompile Include="texture.cpp" />
+    <ClCompile Include="text_renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="shaders\sprite.vs" />
@@ -190,6 +192,8 @@
     <None Include="shaders\particle.vs" />
     <None Include="shaders\post_processing.frag" />
     <None Include="shaders\post_processing.vs" />
+    <None Include="shaders\text.frag" />
+    <None Include="shaders\text.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -43,13 +43,15 @@ struct Collision {
 // easy access to each of the components and manageability.
 class Game {
 public:
-	std::vector<PowerUp>  PowerUps;
+	unsigned int Lives;
+	std::vector<PowerUp> PowerUps;
 	// game levels
 	std::vector<GameLevel> Levels;
 	unsigned int Level;
 	// game state
 	GameState State;
 	bool Keys[1024];
+	bool KeysProcessed[1024];
 	unsigned int Width, Height;
 	// constructor/destructor
 	Game(unsigned int width, unsigned int height);
@@ -67,6 +69,7 @@ public:
 private:
 	void ResetLevel();
 	void ResetPlayer();
+	void ResetPowerUp();
 };
 
 #endif // !GAME_H
