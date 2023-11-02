@@ -30,11 +30,17 @@ const glm::vec2 PLAYER_SIZE(100.0f, 20.0f);
 const float PLAYER_VELOCITY(500.0f);
 // player paddle
 GameObject* Player;
-
 // Initial velocity of the Ball
 const glm::vec2 INITIAL_BALL_VELOCITY(100.0f, -350.0f);
 // Radius of the ball object
 const float BALL_RADIUS = 12.5f;
+
+struct InitialValue {
+	glm::vec2 playerSize = PLAYER_SIZE;
+	glm::vec2 ballVelocity = INITIAL_BALL_VELOCITY;
+};
+
+struct InitialValue initialValue;
 // Ball
 BallObject* Ball;
 PostProcessor* Effects;
@@ -118,8 +124,10 @@ void Game::Update(float dt) {
 			// did the player lose all his lives? : Game over
 			if (this->Lives == 0)
 			{
+				this->Lives = 3;
 				this->ResetLevel();
 				this->State = GAME_MENU;
+				Particles->Reset();
 			}
 			this->ResetPlayer();
 		}
@@ -138,6 +146,9 @@ void Game::Update(float dt) {
 		{
 			Effects->Chaos = true;
 			this->State = GAME_WIN;
+			this->Lives = 3;
+			Player->Size = initialValue.playerSize;
+			Player->Velocity = initialValue.ballVelocity;
 		}
 	}
 }
@@ -177,6 +188,7 @@ void Game::ProcessInput(float dt) {
 			this->KeysProcessed[GLFW_KEY_W] = true;
 			this->ResetPlayer();
 			Particles->Reset();
+			this->Lives = 3;
 			this->ResetPowerUp();
 			this->Level += 1;
 			this->Level = this->Level % this->Levels.size();
@@ -185,6 +197,7 @@ void Game::ProcessInput(float dt) {
 			this->KeysProcessed[GLFW_KEY_S] = true;
 			this->ResetPlayer();
 			Particles->Reset();
+			this->Lives = 3;
 			this->ResetPowerUp();
 			if(this->Level > 0)
 				this->Level -= 1;
@@ -229,23 +242,18 @@ void Game::Render() {
 	std::stringstream ss;
 	ss << this->Lives;
 	Text->RenderText("Lives:" + ss.str(), 5.0f, 5.0f, 1.0f);
-	if (this->State == GAME_ACTIVE)
-	{
+	switch (this->State) {
+	case GAME_ACTIVE:
 		Text->RenderText("Press m for menu", Width - 250, 5.0f, 1.0f);
-	}
-	else if (this->State == GAME_MENU)
-	{
+		break;
+	case GAME_MENU:
 		Text->RenderText("Press ENTER to start", 250.0f, Height / 2, 1.0f);
 		Text->RenderText("Press W or S to select level", 245.0f, Height / 2 + 20.0f, 0.75f);
-	}
-	if (this->State == GAME_WIN)
-	{
-		Text->RenderText(
-			"You WON!!!", 320.0, Height / 2 - 20.0, 1.0, glm::vec3(0.0, 1.0, 0.0)
-		);
-		Text->RenderText(
-			"Press ENTER to retry or ESC to quit", 130.0, Height / 2, 1.0, glm::vec3(1.0, 1.0, 0.0)
-		);
+		break;
+	case GAME_WIN:
+		Text->RenderText("You WON!!!", 260.0, Height / 2 - 40.0, 2.0, glm::vec3(0.0, 1.0, 0.0));
+		Text->RenderText("Press ENTER to retry or ESC to quit", 130.0, Height / 2, 1.0, glm::vec3(1.0, 1.0, 0.0));
+		break;
 	}
 }
 
