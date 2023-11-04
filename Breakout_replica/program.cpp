@@ -13,6 +13,7 @@
 #include "resource_manager.h"
 
 #include <iostream>
+#include <windows.h>
 
 // GLFW function declarations
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -27,6 +28,7 @@ Game Breakout(SCREEN_WIDTH, SCREEN_HEIGHT);
 
 int main(int argc, char* argv[])
 {
+    ShowWindow(GetConsoleWindow(), SW_HIDE);
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
