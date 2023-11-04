@@ -187,6 +187,7 @@ void Game::ProcessInput(float dt) {
 		if (this->Keys[GLFW_KEY_W] && !this->KeysProcessed[GLFW_KEY_W]) {
 			this->KeysProcessed[GLFW_KEY_W] = true;
 			this->ResetPlayer();
+			this->ResetLevel();
 			Particles->Reset();
 			this->Lives = 3;
 			this->ResetPowerUp();
@@ -196,6 +197,7 @@ void Game::ProcessInput(float dt) {
 		if (this->Keys[GLFW_KEY_S] && !this->KeysProcessed[GLFW_KEY_S]) {
 			this->KeysProcessed[GLFW_KEY_S] = true;
 			this->ResetPlayer();
+			this->ResetLevel();
 			Particles->Reset();
 			this->Lives = 3;
 			this->ResetPowerUp();
