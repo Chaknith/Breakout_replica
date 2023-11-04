@@ -106,7 +106,7 @@ void Game::Init() {
 	// initialize particles
 	Particles = new ParticleGenerator(ResourceManager::GetShader("particle"), ResourceManager::GetTexture("particle"), 500);
 	// load background sound
-	SoundEngine->play2D("resources/audios/breakout.mp3", true);
+	SoundEngine->play2D("resources/audios/background.mp3", true);
 	// load font
 	Text = new TextRenderer(this->Width, this->Height);
 	Text->Load("resources/fonts/ocraext.TTF", 24);
@@ -120,6 +120,7 @@ void Game::Update(float dt) {
 		this->DoCollisions();
 		// ball hit the bottom edge
 		if (Ball->Position.y >= this->Height) {
+			SoundEngine->play2D("resources/audios/hurtPlayer.wav", false);
 			--this->Lives;
 			// did the player lose all his lives? : Game over
 			if (this->Lives == 0)
