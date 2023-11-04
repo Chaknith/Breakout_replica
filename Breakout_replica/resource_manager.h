@@ -16,6 +16,7 @@
 
 #include "texture.h"
 #include "shader.h"
+#include <GLFW/glfw3.h>
 
 
 // A static singleton ResourceManager class that hosts several
@@ -37,8 +38,10 @@ public:
     static Texture2D LoadTexture(const char* file, bool alpha, std::string name);
     // retrieves a stored texture
     static Texture2D GetTexture(std::string name);
+    // loads icon from file
+    static void LoadIconFromFile(const char* file, bool alpha, GLFWwindow* window);
     // properly de-allocates all loaded resources
-    static void      Clear();
+    static void Clear();
 private:
     // private constructor, that is we do not want any actual resource manager objects. Its members and functions should be publicly available (static).
     ResourceManager() { }

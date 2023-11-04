@@ -42,6 +42,14 @@ Texture2D ResourceManager::GetTexture(std::string name)
     return Textures[name];
 }
 
+void ResourceManager::LoadIconFromFile(const char* file, bool alpha, GLFWwindow *window)
+{
+    GLFWimage images[1];
+    images[0].pixels = stbi_load(file, &images[0].width, &images[0].height, 0, 4); //rgba channels
+    glfwSetWindowIcon(window, 1, images);
+    stbi_image_free(images[0].pixels);
+}
+
 void ResourceManager::Clear()
 {
     // (properly) delete all shaders	
