@@ -13,3 +13,6 @@ Inside the 'levels' folder, you can edit or add new text files consisting of num
 
 ## Special Feature:
 I have implemented a special feature that allows the power-up that extends the player's pad to remain activated when the player loses. This ensures that the player can eventually win, even if the level is super hard. The power-up will only reset when the player wins or changes levels.
+
+## Disclaimer:
+There is a bug with my collision system. If the ball hits the corner of the block at a specific angle, the rebound angle of the ball is slightly off. I'm not sure how to solve it yet. :D
