@@ -270,10 +270,10 @@ void Game::ResetLevel() {
 void Game::ResetPlayer() {
 	// reset the ball
 	Ball->Stuck = true;
-	Ball->Position = glm::vec2(this->Width / 2.0f - BALL_RADIUS, this->Height - PLAYER_SIZE.y - BALL_RADIUS * 2);
+	Ball->Position = glm::vec2(this->Width / 2.0f - BALL_RADIUS, this->Height - Player->Size.y - BALL_RADIUS * 2);
 	Ball->Velocity = glm::vec2(100.0f, -350.0f);
 	// reset the player
-	Player->Position = glm::vec2(this->Width / 2.0f - PLAYER_SIZE.x / 2.0f, this->Height - PLAYER_SIZE.y);
+	Player->Position = glm::vec2(this->Width / 2.0f - Player->Size.x / 2.0f, this->Height - Player->Size.y);
 	// also disable all active powerups
 	Effects->Chaos = Effects->Confuse = false;
 	Ball->PassThrough = Ball->Sticky = false;
