@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Breakout_replica", "Breakout_replica\Breakout_replica.vcxproj", "{DE03C889-A0A0-4F29-868C-2D8823E29F88}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Breakout", "Installer\Installer.vdproj", "{126A933A-0FBC-4EEE-9E11-F15E76E9A415}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,10 @@ Global
 		{DE03C889-A0A0-4F29-868C-2D8823E29F88}.Release|x64.Build.0 = Release|x64
 		{DE03C889-A0A0-4F29-868C-2D8823E29F88}.Release|x86.ActiveCfg = Release|Win32
 		{DE03C889-A0A0-4F29-868C-2D8823E29F88}.Release|x86.Build.0 = Release|Win32
+		{126A933A-0FBC-4EEE-9E11-F15E76E9A415}.Debug|x64.ActiveCfg = Debug
+		{126A933A-0FBC-4EEE-9E11-F15E76E9A415}.Debug|x86.ActiveCfg = Debug
+		{126A933A-0FBC-4EEE-9E11-F15E76E9A415}.Release|x64.ActiveCfg = Release
+		{126A933A-0FBC-4EEE-9E11-F15E76E9A415}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
