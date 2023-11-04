@@ -106,7 +106,7 @@ void Game::Init() {
 	// initialize particles
 	Particles = new ParticleGenerator(ResourceManager::GetShader("particle"), ResourceManager::GetTexture("particle"), 500);
 	// load background sound
-	SoundEngine->play2D("resources/audios/breakout.mp3", true);
+	SoundEngine->play2D("resources/audios/background.mp3", true);
 	// load font
 	Text = new TextRenderer(this->Width, this->Height);
 	Text->Load("resources/fonts/ocraext.TTF", 24);
@@ -120,6 +120,7 @@ void Game::Update(float dt) {
 		this->DoCollisions();
 		// ball hit the bottom edge
 		if (Ball->Position.y >= this->Height) {
+			SoundEngine->play2D("resources/audios/hurtPlayer.wav", false);
 			--this->Lives;
 			// did the player lose all his lives? : Game over
 			if (this->Lives == 0)
@@ -269,10 +270,10 @@ void Game::ResetLevel() {
 void Game::ResetPlayer() {
 	// reset the ball
 	Ball->Stuck = true;
-	Ball->Position = glm::vec2(this->Width / 2.0f - BALL_RADIUS, this->Height - PLAYER_SIZE.y - BALL_RADIUS * 2);
+	Ball->Position = glm::vec2(this->Width / 2.0f - BALL_RADIUS, this->Height - Player->Size.y - BALL_RADIUS * 2);
 	Ball->Velocity = glm::vec2(100.0f, -350.0f);
 	// reset the player
-	Player->Position = glm::vec2(this->Width / 2.0f - PLAYER_SIZE.x / 2.0f, this->Height - PLAYER_SIZE.y);
+	Player->Position = glm::vec2(this->Width / 2.0f - Player->Size.x / 2.0f, this->Height - Player->Size.y);
 	// also disable all active powerups
 	Effects->Chaos = Effects->Confuse = false;
 	Ball->PassThrough = Ball->Sticky = false;
